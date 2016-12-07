@@ -24,3 +24,4 @@ database/
 # Netbeans
 build/
 nbbuild/
+/dist/
