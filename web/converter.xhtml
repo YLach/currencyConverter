@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>My online currency converter</title>
+    </h:head>
+    <h:body>
+        <h1>Welcome to the best online currency converter</h1>
+        <h:form>
+            <span>
+                <h:outputLabel for="amount" value="Amount: "/>
+                <h:inputText id="amount" value="#{convManager.amountToConvert}"/>
+            </span>
+
+            <span>
+                <h:outputLabel for="fromCurrency" value="From: "/>
+                <h:selectOneMenu id="fromCurrency" value="#{convManager.fromCurrencyCode}">
+                    <f:selectItems value="#{convManager.currencies.entrySet()}" var="c" 
+                        itemValue="#{c.key}" itemLabel="#{c.key} - #{c.value}" />
+                </h:selectOneMenu>
+            </span>
+
+            <span>
+                <h:outputLabel for="toCurrency" value="To: "/>
+                <h:selectOneMenu id="toCurrency" value="#{convManager.toCurrencyCode}">
+                    <f:selectItems value="#{convManager.currencies.entrySet()}" var="c" 
+                        itemValue="#{c.key}" itemLabel="#{c.key} - #{c.value}" />
+                </h:selectOneMenu>
+            </span>       
+            <p>
+                <h:commandButton value="Submit" action="#{convManager.conversion}"/>
+            </p>
+        </h:form>
+
+    </h:body>
+</html>
+
