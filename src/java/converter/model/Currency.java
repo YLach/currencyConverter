@@ -6,23 +6,12 @@
 package converter.model;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MapKeyColumn;
-import javax.persistence.OneToMany;
 
-/**
- *
- * @author YannL
- */
+
 @Entity(name = "Currencies")
-public class Currency implements Serializable {
-    
+public class Currency implements Serializable {  
     private static final long serialVersionUID = 16247164401L;
     
     

@@ -8,25 +8,22 @@
         <title>Conversion</title>
     </h:head>
     <h:body>
-    <f:view>
-    <f:metadata>
-        <f:viewAction action="#{convManager.check}" />
-    </f:metadata>
-    </f:view>  
-        
+        <f:view>
+        <f:metadata>
+        <f:viewAction action="#{convManager.checkConversion}" />
+        </f:metadata>
+        </f:view>  
+
         <h1>Conversion successful</h1>
-        <!-- <c:choose>
-            <c:when test="#{convManager.exception != null}"> -->
         <p>
                     <h:outputText value="Amount: #{convManager.amountToConvert}"/><br/>
                     <h:outputText value="From: #{convManager.fromCurrencyCode}"/><br/>
                     <h:outputText value="To: #{convManager.toCurrencyCode}"/>
         </p>
         <p>
-            <h:outputText value="Conversion: #{convManager.amountConverted}" style="font-weight:bold"/>
+            <h:outputText value="Conversion: #{convManager.amountConverted} #{convManager.toCurrencyCode}" style="font-weight:bold"/>
         </p> 
-            <!-- </c:when>
-        </c:choose> -->
+
         <a href="converter.xhtml">Back to main page</a>
     </h:body>
 </html>

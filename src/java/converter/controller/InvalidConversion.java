@@ -5,15 +5,11 @@
  */
 package converter.controller;
 
-/**
- *
- * @author YannL
- */
-public class UnknownCurrency extends Exception {
+public class InvalidConversion extends Exception {
     
     private static final long serialVersionUID = 16247164402L;
 
-    public UnknownCurrency(String currencyName) {
-        super("Invalid currency: " + currencyName);
+    public InvalidConversion(String mes) {
+        super("Invalid conversion: " + mes);
     }   
 }

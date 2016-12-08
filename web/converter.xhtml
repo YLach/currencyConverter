@@ -4,34 +4,35 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
-        <title>My online currency converter</title>
+        <title>Online currency converter</title>
     </h:head>
     <h:body>
-        <h1>Welcome to the best online currency converter</h1>
+        <h1>Welcome to our online currency converter</h1>
         <h:form>
-            <span>
-                <h:outputLabel for="amount" value="Amount: "/>
-                <h:inputText id="amount" value="#{convManager.amountToConvert}"/>
-            </span>
+            <p>
+                <span>
+                    <h:outputLabel for="amount" value="Amount: "/>
+                    <h:inputText id="amount" value="#{convManager.amountToConvert}"/>
+                </span>
 
-            <span>
-                <h:outputLabel for="fromCurrency" value="From: "/>
-                <h:selectOneMenu id="fromCurrency" value="#{convManager.fromCurrencyCode}">
-                    <f:selectItems value="#{convManager.currencies}"/>
-                </h:selectOneMenu>
-            </span>
+                <span>
+                    <h:outputLabel for="fromCurrency" value="From: "/>
+                    <h:selectOneMenu id="fromCurrency" value="#{convManager.fromCurrencyCode}">
+                        <f:selectItems value="#{convManager.currencies}"/>
+                    </h:selectOneMenu>
+                </span>
 
-            <span>
-                <h:outputLabel for="toCurrency" value="To: "/>
-                <h:selectOneMenu id="toCurrency" value="#{convManager.toCurrencyCode}">
-                    <f:selectItems value="#{convManager.currencies}"/>
-                </h:selectOneMenu>
-            </span>       
+                <span>
+                    <h:outputLabel for="toCurrency" value="To: "/>
+                    <h:selectOneMenu id="toCurrency" value="#{convManager.toCurrencyCode}">
+                        <f:selectItems value="#{convManager.currencies}"/>
+                    </h:selectOneMenu>
+                </span>  
+            </p>         
             <p>
                 <h:commandButton value="Submit" action="#{convManager.conversion}"/>
             </p>
         </h:form>
-
     </h:body>
 </html>
 
