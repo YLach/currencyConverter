@@ -6,16 +6,22 @@
 package converter.view;
 
 import converter.controller.ConverterFacade;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.enterprise.context.Conversation;
+import javax.enterprise.context.ConversationScoped;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
 
 @Named(value = "convManager")
 @RequestScoped
-public class ConvManager {
+public class ConvManager implements Serializable {
 
     @EJB
     private ConverterFacade converterFacade;
@@ -25,12 +31,12 @@ public class ConvManager {
     private Float amountConverted;
     private Map<String, String> currencies;
     private Exception transactionFailure;
-    
+     
 
     @PostConstruct
     public void initCurrencies() {
-        System.err.println(converterFacade.getAllCurrencies());
         if (converterFacade.getAllCurrencies().isEmpty()) {
+            
             converterFacade.createCurrency("EUR", "Euros", 0.1023976481d);
             converterFacade.createCurrency("SEK", "Swedish Krona", 1d);
             converterFacade.createCurrency("USD", "US Dollar", 0.1100736983d);
@@ -38,11 +44,17 @@ public class ConvManager {
         }
     }
     
+    public void check() throws IOException{
+    if (amountToConvert == null) {
+        FacesContext.getCurrentInstance().getExternalContext().redirect("converter.xhtml");
+    }
+}
+    
     
     public String conversion() {
         try {
-            converterFacade.conversion(fromCurrencyCode,
-                fromCurrencyCode, amountToConvert);
+            amountConverted = converterFacade.conversion(fromCurrencyCode,
+                toCurrencyCode, Math.abs(amountToConvert));
         } catch (Exception e) {
             handleException(e);
         }
@@ -56,7 +68,11 @@ public class ConvManager {
     }
     
     public boolean getSuccess() {
-        return (transactionFailure == null);
+        if (transactionFailure == null && amountConverted != null)
+            System.err.println("SUCCESS");
+        else
+            System.err.println("ERROR");
+        return (transactionFailure == null && amountConverted != null);
     }
 
     /**
@@ -96,7 +112,7 @@ public class ConvManager {
     }
     
     public String getToCurrencyCode() {
-        return fromCurrencyCode;
+        return toCurrencyCode;
     }
     
     public void setToCurrencyCode(String toCurrencyCode) {
@@ -104,7 +120,7 @@ public class ConvManager {
     }
 
     public Float getAmountToConvert() {
-        return null;
+        return this.amountToConvert;
     }
 
     public void setAmountToConvert(Float amountToConvert) {

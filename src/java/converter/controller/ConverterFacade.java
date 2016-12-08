@@ -37,7 +37,7 @@ public class ConverterFacade {
         // TODO: error handling
     }
 
-    public double conversion(String originalCurrency, String convertedCurrency,
+    public float conversion(String originalCurrency, String convertedCurrency,
             double amount) throws UnknownCurrency {
         Currency fromCurrency = em.find(Currency.class, originalCurrency);
         if (fromCurrency == null)
@@ -47,17 +47,17 @@ public class ConverterFacade {
         if (toCurrency == null)
             throw new UnknownCurrency(convertedCurrency);
         
-        return ((fromCurrency.getCurrencyPerSEKRate() / 
-                toCurrency.getCurrencyPerSEKRate()) * amount);
+        Double res = (toCurrency.getCurrencyPerSEKRate() / 
+                fromCurrency.getCurrencyPerSEKRate()) * amount;
+        return res.floatValue();
     }
  
     public Map<String, String> getAllCurrencies() {
-        System.err.println("ICI");
         Map<String, String> currencies = new LinkedHashMap<>();
         List<Currency> curreniesObj = em.createQuery("SELECT c FROM Currencies c",
                                                         Currency.class).getResultList();
         for (Currency c : curreniesObj)
-            currencies.put(c.getCode(), c.getCurrencyName());
+            currencies.put(c.getCode() + " - " + c.getCurrencyName(), c.getCode());
         
         return currencies;
     }

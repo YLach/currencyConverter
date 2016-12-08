@@ -17,16 +17,14 @@
             <span>
                 <h:outputLabel for="fromCurrency" value="From: "/>
                 <h:selectOneMenu id="fromCurrency" value="#{convManager.fromCurrencyCode}">
-                    <f:selectItems value="#{convManager.currencies.entrySet()}" var="c" 
-                        itemValue="#{c.key}" itemLabel="#{c.key} - #{c.value}" />
+                    <f:selectItems value="#{convManager.currencies}"/>
                 </h:selectOneMenu>
             </span>
 
             <span>
                 <h:outputLabel for="toCurrency" value="To: "/>
                 <h:selectOneMenu id="toCurrency" value="#{convManager.toCurrencyCode}">
-                    <f:selectItems value="#{convManager.currencies.entrySet()}" var="c" 
-                        itemValue="#{c.key}" itemLabel="#{c.key} - #{c.value}" />
+                    <f:selectItems value="#{convManager.currencies}"/>
                 </h:selectOneMenu>
             </span>       
             <p>
